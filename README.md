@@ -8,6 +8,7 @@
 - **Capital intensive thing**
 - **Hardware refresh**
 
+#### **End-to-End Cloud Migration Plan from On-Premises to AWS**
 
 ### **Example Scenario:**
 Your organization has multiple environments in an on-premises setup, and now we are planning to migrate some applications and databases from on-premises to AWS.
