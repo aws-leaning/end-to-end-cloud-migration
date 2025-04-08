@@ -1,4 +1,13 @@
-#### **End-to-End Cloud Migration Plan from On-Premises to AWS**
+#### **Reasons fir cLOud Migration**
+- **Host a place with security and it is private one**
+- **Need to buy huge number of servers along with routers,cables**
+- **Must maintain data center temp below 20 degrees**
+- **Dual networks from diff providers**
+- **Hardware + Storage + Network teams**
+- **Dual power**
+- **Capital intensive thing**
+- **Hardware refresh**
+
 
 ### **Example Scenario:**
 Your organization has multiple environments in an on-premises setup, and now we are planning to migrate some applications and databases from on-premises to AWS.
