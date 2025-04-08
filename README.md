@@ -1,4 +1,4 @@
-#### **Reasons fir cLOud Migration**
+#### **Reasons for Cloud Migration**
 - **Host a place with security and it is private one**
 - **Need to buy huge number of servers along with routers,cables**
 - **Must maintain data center temp below 20 degrees**
