@@ -161,14 +161,17 @@ When migrating workloads to the cloud, organizations typically follow one or mor
 - **PRE-PROD CIDR** - 10.50.0.0/16
 - **PROD CIDR** - 10.60.0.0/16
 - **INFRA CIDR** - 10.70.0.0/16  
+- 
   **Note:** Wherever applicable, we will use **Terraform** to automate infrastructure provisioning.
+- 
 ### **Step 14: Site-to-Site VPN Setup**
 - Work with the **on-premises network team** to establish a **Site-to-Site VPN** between **on-premises** and **AWS**.
 - Test **connectivity** to ensure smooth integration with AWS resources.  
+- 
   **Note:** Wherever applicable, we will use **Terraform** to automate infrastructure provisioning.
+- 
 ### **Step 15: AWS Client VPN / Cisco VPN Setup**
 - Set up **AWS Client VPN** or **Cisco VPN** to allow secure access to private AWS resources.
-- Example use case: **Accessing internal application URLs (e.g., https://user-registration-dev.techworldwithmurali.in).**
 
 **Prerequisites for AWS Client VPN Setup:**
 1. **AWS Directory Service** configuration
@@ -186,99 +189,67 @@ When migrating workloads to the cloud, organizations typically follow one or mor
 
 **Note:** These tools can either be deployed on **individual EC2 instances** or hosted in an **EKS (Kubernetes) cluster** for better scalability.
 
-### **Step 17: ECS or EKS setup for a microservice applications via Terraform.**
-- Deploy microservices in either:
-    - **ECS (Elastic Container Service)**
-    - **EKS (Elastic Kubernetes Service)**
-- The choice depends on **application architecture** and **team discussions**.
-
-**Note:** Wherever applicable, we will use **Terraform** to automate infrastructure provisioning.
-### **Step 18: Monolithic Applications Setup via Terraform**
-- For **monolithic applications**, set up:
-    - **Auto Scaling Groups (ASG)**
-    - **Application Load Balancer (ALB)** (internal/external) for traffic distribution
-    - Create/update the records in **Route 53 hosted zone** etc.
-
-**Note:** Wherever applicable, we will use **Terraform** to automate infrastructure provisioning.
-### **Step 19: Route 53 DNS Configuration**
+### **Step 17: Route 53 DNS Configuration**
 - Create a **Hosted Zone** in **Route 53**. Example:
-    - `techworldwithmurali.in`
+    - `akhilsadevops.in`
 - Migrate DNS records to the **Route 53 hosted zone**, if applicable.
 
-### **Step 20: Database Setup**
+### **Step 18: Database Setup**
 - Set up **Amazon RDS MySQL Cluster** as per the database requirements.
 - Inform the **DBA team** once provisioning is complete.  
+
   **Note:** Wherever applicable, we will use **Terraform** to automate infrastructure provisioning.
-### **Step 21: Database Migration**
+- 
+### **Step 19: Database Migration**
 - Migrate databases from **on-premises to AWS** using the appropriate strategy:
     - **AWS DMS (Database Migration Service)**
     - **Log Shipping**
-    - **Other database replication techniques**
 
 **Responsibility:** The **DBA team** will handle this migration process.
 
-### **Step 21: Infrastructure Setup Completion Notification**
-- Once the infrastructure setup is complete:
-    - The **DevOps team** will notify the **Scrum Master**, **Development team**, and **QA team**.
-    - All corresponding **JIRA/Rally tickets** will be updated accordingly.
-    - A final **infrastructure validation checklist** will be completed to ensure:
-        - Networking components (VPC, subnets, security groups) are correctly configured.
-        - VPN connectivity is established and tested.
-        - DevOps tools are accessible and functional.
-        - Databases are provisioned, and accessible.
-        - Route 53 DNS records are correctly set up.
-    - Documentation, including **architecture diagrams, and access credentials**, will be shared in the designated **Confluence/JIRA **.
-
 ## **Phase 3: Build, Deployment & Testing**
 
-### **Step 22: Development Team Preparation**
-- Developers implement any **necessary changes** to their applications for deployment.
-
-### **Step 23: Application Build**
+### **Step 20: Application Build**
 - Developers build the application using **Jenkins jobs**.
 
-### **Step 24: Deployment of Microservices/Monolithic Applications**
+### **Step 21: Deployment of Microservices/Monolithic Applications**
 - Developers deploy **microservices** in the **DEV environment** using **Jenkins jobs**. After deployment:
     - **Load Balancers (LB), listeners, and Route 53 records** are automatically created using the **Ingress Controller** and **ExternalDNS**.
 
 - Developers deploy **monolithic applications** in the **DEV environment** using **Jenkins jobs**. After deployment:
     - **Load Balancers, listeners, and Route 53 records** are automatically created via **Terraform**.
 
-### **Step 25: Testing the Application**
-- Validate the aplication whether the functionality is working as expected.
+### **Step 22: Testing the Application**
+- Validate the application whether the functionality is working as expected.
 
 **Note:** Once testing is complete, we will shut down the application on the AWS side. During the cutover, we will bring the application back up.
 
 ## Phase 4: Final Cutover to AWS: Cutover Plan & Go-Live Checklist
 
-### **Step 26: Schedule the Cutover Meeting**
+### **Step 23: Schedule the Cutover Meeting**
 - Based on the final discussion, a **cutover date** will be finalized.
 - The **Scrum Master** will schedule the meeting.
 - The cutover process typically takes **3 to 4 hours**, but depending on the complexity of the applications, it may take longer.
 
-### **Step 27: Stop the Application in On-Premises**
+### **Step 24: Stop the Application in On-Premises**
 - Stop the on-premises application **after the final data sync**.
 - Ensure that no new transactions are being processed in the on-premises system.
 
-### **Step 28: DNS Cutover & Go-Live**
-- **Update DNS Records:** Modify **Route 53** records to point to the **AWS Load Balancer** endpoints.
-- **Enable AWS Application:** Make the AWS-hosted application live.
-- **Monitor Traffic Flow:** Ensure users are now connecting to AWS instead of the on-premises system.
 
-### **Step 29: Application Validation & QA Testing**
+### **Step 25: Application Validation & QA Testing**
 - Developers and QA teams validate that the application functions as expected.
 - Ensure all **integrations, services, and APIs** are working correctly.
 - The QA team performs **regression testing** and notifies all relevant teams of any issues.
 
-### **Step 30: Monitoring & Stabilization**
+### **Step 26: Monitoring & Stabilization**
 - Monitor the environment for a few **days** to detect any issues.
 - Address and resolve issues as needed with the **Development** or **DevOps** teams.
 -
-### **Step 31: Rollback Plan (If Needed)**
+### **Step 27: Rollback Plan (If Needed)**
 - If **issues occur**, attempt to **fix them on demand**.
 - If unresolved, **roll back the DNS endpoint** to the **on-premises** infrastructure.
 
-### **Step 32: Migration to Other Environments**
+### **Step 28: Migration to Other Environments**
 - If everything is **stable**, replicate the same process for:
     - **TEST**
     - **QA**
